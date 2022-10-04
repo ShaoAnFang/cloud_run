@@ -12,7 +12,33 @@ def hello_world():
 
 @app.route('/GGWP', methods=['GET'])
 def test():
-    return "Hello World!"
+    return "GGWP"
+
+#AVgle API
+@app.route('/avgle', methods=['GET'])
+def darkAnan():
+    AVGLE_LIST_COLLECTIONS_API_URL = 'https://api.avgle.com/v1/videos/{}'
+
+    randomPagesNumber = random.randint(0,1195)
+    #page 1195,有60片,其他都50
+    #print randomPageNumber
+    if randomPagesNumber != 1195:
+        #0~49選不重複的7個數字
+        randomVideoNumbers = random.sample(range(0, 49), 5)
+    else:
+        randomVideoNumbers = random.sample(range(0, 59), 5)
+
+    res = requests.get(AVGLE_LIST_COLLECTIONS_API_URL.format(randomPagesNumber))
+    res.encoding='utf8'
+    #print(res.json())
+    videos = []
+    videos = res.json()['response']['videos']
+    
+    videoRandom = []
+    for x in randomVideoNumbers:
+        videoRandom.append(videos[x])
+    
+    return videoRandom
 
 
 if __name__ == "__main__":
