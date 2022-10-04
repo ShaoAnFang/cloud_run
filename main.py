@@ -1,4 +1,5 @@
 import os
+import json
 import random
 import requests
 from flask import Flask
@@ -39,7 +40,7 @@ def darkAnan():
     for x in randomVideoNumbers:
         videoRandom.append(videos[x])
     
-    return videoRandom
+    return json.dumps(videoRandom)
 
 
 if __name__ == "__main__":
